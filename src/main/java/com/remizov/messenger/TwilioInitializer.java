@@ -1,6 +1,6 @@
 package com.remizov.messenger;
 
-import com.twilio.sdk.Twilio;
+import com.twilio.Twilio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TwilioInitializer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TwilioInitializer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TwilioInitializer.class);
     private final TwilioConfiguration twilioConfiguration;
 
     @Autowired
@@ -18,6 +18,6 @@ public class TwilioInitializer {
                 twilioConfiguration.getAccountSid(),
                 twilioConfiguration.getAuthToken()
         );
-        LOGGER.info("Twilio initialized with account sid {}",twilioConfiguration.getAccountSid());
+        LOG.info("Twilio initialized with account sid {}",twilioConfiguration.getAccountSid());
     }
 }
