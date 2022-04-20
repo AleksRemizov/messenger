@@ -1,6 +1,9 @@
-package com.remizov.messenger;
+package com.remizov.messenger.service;
 
 
+import com.remizov.messenger.exception.NoValidNumberException;
+import com.remizov.messenger.model.SmsRequest;
+import com.remizov.messenger.config.TwilioConfiguration;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
@@ -9,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service("twilio")
-public class TwilioSmsSender implements SmsSender{
+public class TwilioSmsSender implements SmsSender {
 
     private static final Logger LOG = LoggerFactory.getLogger(TwilioSmsSender.class);
     private final TwilioConfiguration twilioConfiguration;
@@ -31,13 +37,14 @@ public class TwilioSmsSender implements SmsSender{
             creator.create();
             LOG.info("Sent sms {}" + smsRequest);
         }else{
-            throw new IllegalArgumentException(
+            throw new NoValidNumberException(
                     "Phone number [" + smsRequest.getPhoneNumber() +"] is not a valid number !");
         }
     }
 
-    private boolean isPhoneNumberValid(String phoneNumber) {
-        final String PHONE_REGEX = "^\\+[1-9]\\d{1,14}$";
-        return phoneNumber.matches(PHONE_REGEX);
+    static boolean isPhoneNumberValid(String phoneNumber) {
+        Pattern phonePattern = Pattern.compile("^\\+[1-9]\\d{1,14}$");
+        Matcher simpleMatcher = phonePattern.matcher(phoneNumber);
+        return simpleMatcher.matches();
     }
 }

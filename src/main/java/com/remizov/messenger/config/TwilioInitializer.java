@@ -1,4 +1,4 @@
-package com.remizov.messenger;
+package com.remizov.messenger.config;
 
 import com.twilio.Twilio;
 import org.slf4j.Logger;

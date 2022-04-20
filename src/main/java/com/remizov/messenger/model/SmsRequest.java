@@ -1,4 +1,4 @@
-package com.remizov.messenger;
+package com.remizov.messenger.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.NotBlank;

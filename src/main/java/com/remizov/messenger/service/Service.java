@@ -1,5 +1,6 @@
-package com.remizov.messenger;
+package com.remizov.messenger.service;
 
+import com.remizov.messenger.model.SmsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
