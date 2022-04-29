@@ -11,7 +11,6 @@ import org.springframework.validation.Validator;
 public class SmsValidator implements Validator {
     private final Integer MESSAGE_SIZE = 402;
 
-
     @Override
     public boolean supports(Class<?> clazz) {
         return SmsRequest.class.equals(clazz);

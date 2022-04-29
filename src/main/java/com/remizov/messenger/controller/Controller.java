@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @org.springframework.stereotype.Controller
-@RequestMapping("api/v1/sms")
+@RequestMapping("api/v1/messenger")
 public class Controller {
     private final Service service;
 
@@ -24,28 +24,18 @@ public class Controller {
     }
 
     @GetMapping
-    public String homePage(Model model) {
+    public String homePage(SmsRequest smsRequest) {
         return "sms";
     }
 
     @PostMapping
-    public String addRepair(@Valid @RequestBody SmsRequest smsRequest, BindingResult result, Model model) {
+    public String addRepair(@Valid SmsRequest smsRequest, BindingResult result, Model model) {
         smsValidator.validate(smsRequest, result);
         if (result.hasErrors()) {
-            model.addAttribute("isNew",true);
             return "sms";
         }else {
             this.service.sendSms(smsRequest);
         }
-        return "sms";
+        return "response";
     }
-
-//    @PostMapping
-//    public void sendSms(@Valid @RequestBody SmsRequest smsRequest){
-//        service.sendSms(smsRequest);
-//    }
-
-
-
-
 }
