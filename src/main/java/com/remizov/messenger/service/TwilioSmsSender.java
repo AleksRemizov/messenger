@@ -43,7 +43,7 @@ public class TwilioSmsSender implements SmsSender {
     }
 
     static boolean isPhoneNumberValid(String phoneNumber) {
-        Pattern phonePattern = Pattern.compile("^\\+[1-9]\\d{1,14}$");
+        Pattern phonePattern = Pattern.compile("^\\+?[1-9]\\d{11,14}$");
         Matcher simpleMatcher = phonePattern.matcher(phoneNumber);
         return simpleMatcher.matches();
     }

@@ -1,19 +1,21 @@
 package com.remizov.messenger.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.remizov.messenger.constraint.CustomTwilioPhoneNumberConstraint;
+
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 public class SmsRequest {
-    @NotBlank(message = "Please enter phone number")
-    //@Pattern(regexp = "^\\+[1-9]\\d{1,14}$")
+
+    @CustomTwilioPhoneNumberConstraint
     private final String phoneNumber;
     @NotBlank(message = "{message.empty}")
+    @Size(max = 402, message = "message.maxSize")
     private final String message;
 
-    public SmsRequest(@JsonProperty("phoneNumber") String phoneNumber,
-                      @JsonProperty("message")String message) {
+    protected SmsRequest( String phoneNumber, String message) {
         this.phoneNumber = phoneNumber;
         this.message = message;
     }
