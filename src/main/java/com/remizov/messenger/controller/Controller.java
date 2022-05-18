@@ -27,7 +27,7 @@ public class Controller {
     }
 
     @PostMapping
-    public String addRepair(@Valid SmsRequest smsRequest, BindingResult result, Model model) {
+    public String sendSms(@Valid SmsRequest smsRequest, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "sms";
         }else {
