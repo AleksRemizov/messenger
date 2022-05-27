@@ -33,6 +33,6 @@ public class Controller {
         }else {
             this.service.sendSms(smsRequest);
         }
-        return "response";
+        return "redirect:/api/v1/messenger";
     }
 }
